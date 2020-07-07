@@ -7,6 +7,7 @@ public class Shot : MonoBehaviour
 
     public GameObject bullet = null;
     public Transform spawner = null;
+    public Transform parent = null;
 
 
     void Start()
@@ -24,6 +25,7 @@ public class Shot : MonoBehaviour
         while (true)
         {
             GameObject mBullet = (GameObject)Instantiate(bullet, spawner.position, Quaternion.identity);
+            mBullet.transform.SetParent(parent);
             Vector3 fwd = transform.TransformDirection(Vector3.forward);
             mBullet.GetComponent<Rigidbody>().AddForce(fwd * 500);
             yield return new WaitForSeconds(0.5f);
